@@ -1,5 +1,6 @@
 import {
   Component,
+  ContentChild,
   ElementRef,
   Inject,
   Input,
@@ -20,11 +21,15 @@ import {
 })
 export class ControlComponent {
   @Input({ required: true }) label!: string;
+  @ContentChild('input') private control?: ElementRef<
+    HTMLInputElement | HTMLTextAreaElement
+  >;
 
   constructor(private el: ElementRef) {}
 
   onClick() {
     console.log('Clicked!');
     console.log(this.el);
+    console.log(this.control?.nativeElement);
   }
 }
